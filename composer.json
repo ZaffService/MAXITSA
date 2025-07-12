@@ -1,0 +1,16 @@
+{
+  "name": "moustapha/apprentissage",
+  "description": "Application MAXITSA - Système de transfert et de paiement",
+  "autoload": {
+    "psr-4": {
+      "Moustapha\\Apprentissage\\": "src/"
+    },
+    "classmap": ["app/", "src/"]
+  },
+  "authors": [
+    {
+      "name": "Moustapha"
+    }
+  ],
+  "require": {}
+}

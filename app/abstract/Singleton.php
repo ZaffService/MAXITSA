@@ -1,0 +1,2 @@
+<?php
+// Pattern Singleton

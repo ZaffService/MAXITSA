@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS comptes (
+    id SERIAL PRIMARY KEY,
+    userid INTEGER REFERENCES users(id),
+    type_compte VARCHAR(20) DEFAULT 'principal',
+    solde DECIMAL(15,2) DEFAULT 0.00,
+    numero_compte VARCHAR(50) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

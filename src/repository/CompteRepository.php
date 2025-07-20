@@ -35,6 +35,7 @@ class CompteRepository extends AbstractRepository{
         
         return null;
     }
+    
     public function getCompteByClientId(int $clientId): ?array
     {
         $query = "SELECT * FROM compte WHERE client_id = :clientId";
@@ -71,5 +72,56 @@ class CompteRepository extends AbstractRepository{
         return [];
     }
 
-   
+    public function addSecondaryAccount(int $clientId, string $telephone, float $solde): bool
+    {
+        $stmt = $this->pdo->prepare(
+            "INSERT INTO compte (solde, telephone, type, client_id) VALUES (:solde, :telephone, 'secondaire', :clientId)"
+        );
+        return $stmt->execute([
+            'solde' => $solde,
+            'telephone' => $telephone,
+            'clientId' => $clientId
+        ]);
+    }
+    public function getComptePrincipalByClientId(int $clientId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM compte WHERE client_id = :clientId AND type = 'principal' LIMIT 1");
+        $stmt->execute(['clientId' => $clientId]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
+    }
+    public function incrementSolde(int $compteId, float $montant): bool
+    {
+        $stmt = $this->pdo->prepare("UPDATE compte SET solde = solde + :montant WHERE id = :compteId");
+        return $stmt->execute([
+            'montant' => $montant,
+            'compteId' => $compteId
+        ]);
+    }
+    public function transfererSolde(int $comptePrincipalId, int $compteSecondaireId, float $montant): bool
+    {
+        $this->pdo->beginTransaction();
+        try {
+            $stmt1 = $this->pdo->prepare(
+                "UPDATE compte SET solde = solde - :montant WHERE id = :id"
+            );
+            $stmt1->execute(['montant' => $montant, 'id' => $comptePrincipalId]);
+
+            $stmt2 = $this->pdo->prepare(
+                "UPDATE compte SET solde = solde + :montant WHERE id = :id"
+            );
+            $stmt2->execute(['montant' => $montant, 'id' => $compteSecondaireId]);
+
+            $this->pdo->commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->pdo->rollBack();
+            return false;
+        }
+    }
+    public function getComptesSecondairesByClientId(int $clientId): array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM compte WHERE client_id = :clientId AND type = 'secondaire'");
+        $stmt->execute(['clientId' => $clientId]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

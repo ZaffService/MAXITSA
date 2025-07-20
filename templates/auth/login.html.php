@@ -1,3 +1,9 @@
+<?php if (!empty($error)): ?>
+    <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <?= htmlspecialchars($error) ?>
+    </div>
+<?php endif; ?>
+
 <div class="bg-white rounded-2xl mt-6 shadow-2xl overflow-hidden max-w-4xl mx-auto">
     <div class="md:flex">
         <div class="md:w-1/2 bg-gradient-to-br from-maxitsa-orange to-orange-600 p-12 text-white flex flex-col justify-center">

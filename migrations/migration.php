@@ -47,9 +47,9 @@ $pdo->exec("
 $pdo->exec("
     CREATE TABLE compte (
         id SERIAL PRIMARY KEY,
-        solde FLOAT NOT NULL,
+        solde NUMERIC(15,2) NOT NULL DEFAULT 0,
         telephone VARCHAR(20) NOT NULL,
-        type VARCHAR(50) NOT NULL,
+        type VARCHAR(50) NOT NULL, -- 'principal' ou 'secondaire'
         client_id INT NOT NULL,
         FOREIGN KEY (client_id) REFERENCES users(id)
     );
@@ -59,9 +59,9 @@ $pdo->exec("
 $pdo->exec("
     CREATE TABLE transaction (
         id SERIAL PRIMARY KEY,
-        montant FLOAT NOT NULL,
-        date TIMESTAMP NOT NULL,
-        type VARCHAR(50) NOT NULL,
+        montant NUMERIC(15,2) NOT NULL,
+        date TIMESTAMP NOT NULL DEFAULT NOW(),
+        type VARCHAR(50) NOT NULL, -- 'depot' ou 'retrait'
         compte_id INT NOT NULL,
         FOREIGN KEY (compte_id) REFERENCES compte(id)
     );

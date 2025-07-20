@@ -8,6 +8,7 @@ class UserEntity extends AbstractEntity {
     private string $nom;
     private string $prenom;
     private string $login;
+    private string $adresse;
     private string $password;
     private array $comptes;
     private string $photoRecto;
@@ -46,6 +47,16 @@ class UserEntity extends AbstractEntity {
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getAdresse(): string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): void
+    {
+        $this->adresse = $adresse;
     }
 
     public function getNom(): string

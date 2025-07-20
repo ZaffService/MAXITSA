@@ -23,15 +23,13 @@
           <h3 class="text-3xl font-bold"> <?=$solde?> </h3>
           
       </div>
-      <button class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-colors">
-          Recharger
-      </button>
+      
   </div>
 </div>
 
 <!-- Action Buttons -->
 <div class="grid grid-cols-3 gap-4 mb-8">
-  <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
+  <a href="/depot" class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
       <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
           <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -39,17 +37,17 @@
       </div>
       <h4 class="font-semibold text-gray-800 mb-1">Dépôt</h4>
       <p class="text-sm text-gray-600">Alimenter le compte</p>
-  </div>
+  </a>
 
-  <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
+  <a href="/retrait" class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
       <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
           <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
           </svg>
       </div>
-      <h4 class="font-semibold text-gray-800 mb-1">Transfert</h4>
-      <p class="text-sm text-gray-600">Envoyer de l'argent</p>
-  </div>
+      <h4 class="font-semibold text-gray-800 mb-1">Retrait</h4>
+      <p class="text-sm text-gray-600">Retirer de l'argent</p>
+  </a>
 
   <div class="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
       <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -62,20 +60,24 @@
   </div>
 </div>
 
-<!-- Recent Transactions -->
 <div class="bg-white rounded-xl p-6">
   <div class="flex items-center justify-between mb-6">
       <h3 class="text-lg font-semibold text-gray-800">Dernières transactions</h3>
       <a href="#" class="text-maxitsa-orange hover:underline text-sm">Voir toutes les transactions ></a>
   </div>
 
-
   <div class="space-y-4">
       <?php foreach ($transaction as $valeur): ?>
+          <?php
+              $isDepot = $valeur['type'] === 'depot';
+              $color = $isDepot ? 'text-green-600' : 'text-red-600';
+              $bgColor = $isDepot ? 'bg-green-100' : 'bg-red-100';
+              $sign = $isDepot ? '' : '-';
+          ?>
           <div class="flex items-center justify-between py-3 border-b border-gray-100">
               <div class="flex items-center">
-                  <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                      <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div class="w-10 h-10 <?= $bgColor ?> rounded-full flex items-center justify-center mr-4">
+                      <svg class="w-5 h-5 <?= $color ?>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                       </svg>
                   </div>
@@ -85,13 +87,11 @@
                   </div>
               </div>
               <div class="text-right">
-                  <p class="font-semibold text-green-600"><?= $valeur['montant'] ?> CFA</p>
+                  <p class="font-semibold <?= $color ?>"><?= $sign ?><?= $valeur['montant'] ?> CFA</p>
                   <p class="text-xs text-gray-500"><?= date('H:i', strtotime($valeur['date'])) ?></p>
               </div>
           </div>
       <?php endforeach; ?>
   </div>
        
-      
-  </div>
 </div>

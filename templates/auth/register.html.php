@@ -111,6 +111,11 @@
             </ul>
         </div>
     <?php endif; ?>
+    <?php if ($success): ?>
+        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+            Inscription réussie ! Votre compte a été créé.
+        </div>
+    <?php endif; ?>
     <form action="/register" method="POST" enctype="multipart/form-data">
         <div class="section-title">
             <span></span> Informations personnelles
@@ -131,8 +136,8 @@
                 <input type="text" name="adresse" id="adresse" placeholder="Entrez votre adresse" required>
             </div>
             <div class="form-group" style="flex:1;">
-                <label for="telephone">Téléphone</label>
-                <input type="text" name="telephone" id="telephone" placeholder="+221 77 123 45 67" required>
+                <label for="login">Téléphone</label>
+                <input type="text" name="login" id="login" placeholder="+221 77 123 45 67" required>
             </div>
         </div>
         <div class="section-title">
@@ -144,8 +149,8 @@
                 <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required>
             </div>
             <div class="form-group" style="flex:1;">
-                <label for="cni">Numéro d'identité</label>
-                <input type="text" name="cni" id="cni" placeholder="Numéro de carte d'identité" required>
+                <label for="numeroidentite">Numéro d'identité</label>
+                <input type="text" name="numeroidentite" id="numeroidentite" placeholder="Numéro de carte d'identité" required>
             </div>
         </div>
         <div class="section-title">
@@ -153,15 +158,15 @@
         </div>
         <div class="form-row">
             <div class="form-group" style="flex:1;">
-                <label for="photo_recto">Recto</label>
+                <label for="photorecto">Recto</label>
                 <div class="file-box">
-                    <input type="file" name="photo_recto" id="photo_recto" accept="image/*" required>
+                    <input type="file" name="photorecto" id="photorecto" accept="image/*" required>
                 </div>
             </div>
             <div class="form-group" style="flex:1;">
-                <label for="photo_verso">Verso</label>
+                <label for="photoverso">Verso</label>
                 <div class="file-box">
-                    <input type="file" name="photo_verso" id="photo_verso" accept="image/*" required>
+                    <input type="file" name="photoverso" id="photoverso" accept="image/*" required>
                 </div>
             </div>
         </div>

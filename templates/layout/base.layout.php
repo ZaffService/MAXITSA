@@ -29,8 +29,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 <body class="bg-gray-50">
     <div class="min-h-screen">
         <!-- Header -->
-        <header class="bg-white shadow-sm border-b">
-            <div class="flex items-center justify-between px-6 py-4">
+        <header class="bg-white shadow-sm border-b fixed top-0 left-0 right-0 z-10">
+            <div class="flex items-center justify-between px-6 py-4 ml-16">
                 <div class="flex items-center space-x-4">
                     <div class="w-10 h-10 bg-maxitsa-orange rounded-full flex items-center justify-center">
                         <span class="text-white font-bold text-lg">M</span>
@@ -48,7 +48,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
         <div class="flex">
             <!-- Sidebar -->
-            <aside class="w-16 bg-maxitsa-orange min-h-screen">
+            <aside class="w-16 bg-maxitsa-orange min-h-screen fixed top-0 left-0 z-20">
                 <div class="flex flex-col items-center py-6 space-y-6">
                     <div class="w-8 h-8 bg-white bg-opacity-20 rounded flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -71,25 +71,17 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
                         </svg>
                     </div>
 
-        <div class="w-8 h-8 bg-white bg-opacity-20 rounded flex items-center justify-center">
-            <a href="/logout" class="block">
-                <div class="w-8 h-8 bg-white bg-opacity-20 rounded flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12h-9m0 0l3-3m-3 3l3 3" />
-                    </svg>
+                    <a href="/logout" class="w-8 h-8 bg-white bg-opacity-20 rounded flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12h-9m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                    </a>
                 </div>
-            </a>
-
-        </div>
-
-
-                </div>
-               
             </aside>
 
             <!-- Main Content -->
-            <main class="flex-1 p-6">
+            <main class="flex-1 ml-16 mt-20 p-6">
                 <?php echo $content ?>
             </main>
         </div>

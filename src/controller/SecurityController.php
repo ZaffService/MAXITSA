@@ -18,21 +18,22 @@ class SecurityController extends AbstractController
     
     public function login()
     {
+        $error = null;
         if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             $login = ($_POST['login']);
             $password = ($_POST['password']);
-            
             $user = $this->userService->getUserByLoginPassword($login, $password);
-            
             if($user !== null)
             {
                 $this->session->set('user', $user);
                 header('Location: /dashboardClient');
                 exit();
+            } else {
+                $error = "Identifiants incorrects";
             }
         }
-        $this->renderHTML('auth/login.html');
+        $this->renderHTML('auth/login.html', ['error' => $error]);
     }
     public function logout(){
         session_destroy(); $login = ($_POST['login']);

@@ -33,6 +33,30 @@ class CompteService {
         return $this->compteRepository->getAccountsByClientId($clientId) ?? [];
     }
 
+    public function addSecondaryAccount(int $clientId, string $telephone, float $solde): bool
+    {
+        return $this->compteRepository->addSecondaryAccount($clientId, $telephone, $solde);
+    }
+
+    public function getComptePrincipalByClientId(int $clientId): ?array
+    {
+        return $this->compteRepository->getComptePrincipalByClientId($clientId);
+    }
+
+    public function incrementSolde(int $compteId, float $montant): bool
+    {
+        return $this->compteRepository->incrementSolde($compteId, $montant);
+    }
+
+    public function transfererSolde(int $comptePrincipalId, int $compteSecondaireId, float $montant): bool
+    {
+        return $this->compteRepository->transfererSolde($comptePrincipalId, $compteSecondaireId, $montant);
+    }
+
+    public function getComptesSecondairesByClientId(int $clientId): array
+    {
+        return $this->compteRepository->getComptesSecondairesByClientId($clientId) ?? [];
+    }
+
 }
 
- 

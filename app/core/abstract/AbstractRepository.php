@@ -6,7 +6,7 @@ use App\Core\Database;
 use PDO;
 abstract class AbstractRepository{
 
-    protected PDO $pdo;
+   protected PDO $pdo;
 
    public function __construct(){
 

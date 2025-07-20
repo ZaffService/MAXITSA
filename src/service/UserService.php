@@ -27,4 +27,9 @@ public function getUserByLoginPassword(string $login, string $password): ?UserEn
     return $this->userRepository->seConnecter($login, $password);
 }
 
+public function registerUser(array $data): bool
+{
+    return $this->userRepository->create($data);
+}
+
 }

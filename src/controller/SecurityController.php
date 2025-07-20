@@ -35,7 +35,8 @@ class SecurityController extends AbstractController
         $this->renderHTML('auth/login.html');
     }
     public function logout(){
-        session_destroy();
+        session_destroy(); $login = ($_POST['login']);
+            $password = ($_POST['password']);
         header('location:/');
 
     }

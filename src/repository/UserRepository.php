@@ -49,7 +49,21 @@ class UserRepository extends AbstractRepository
         return $user ?: null;
     }
 
-    
-
-   
+    public function create(array $data): bool
+    {
+        $stmt = $this->pdo->prepare(
+            "INSERT INTO users (nom, prenom, login, password, photorecto, photoverso, numeroidentite, profil_id) 
+            VALUES (:nom, :prenom, :login, :password, :photorecto, :photoverso, :numeroidentite, :profil_id)"
+        );
+        return $stmt->execute([
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'login' => $data['telephone'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+            'photorecto' => $data['photo_recto'],
+            'photoverso' => $data['photo_verso'],
+            'numeroidentite' => $data['cni'],
+            'profil_id' => 1 // à adapter
+        ]);
+    }
 }

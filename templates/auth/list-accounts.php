@@ -30,86 +30,48 @@
       <div class="space-y-6">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vos comptes</h2>
         
-        <!-- Compte Principal -->
-        <div class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center space-x-3">
-                  <div class="p-2 bg-maxitsa-orange rounded-lg">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
+        <?php if (empty($accounts)): ?>
+          <div class="bg-white rounded-xl shadow p-6 text-center text-gray-500">
+            Aucun compte trouvé pour le moment. <a href="/ajouter-compte" class="text-maxitsa-orange font-semibold">Ajoutez-en un !</a>
+          </div>
+        <?php else: ?>
+          <?php foreach ($accounts as $compte): ?>
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-maxitsa-orange rounded-lg">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars($compte->getType()) ?></h3>
+                    </div>
                   </div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Compte principal</h3>
+                  <div class="text-right">
+                    <div class="text-2xl font-bold text-gray-900 dark:text-white"><?= number_format($compte->getSolde(), 2, ',', ' ') ?> FCFA</div>
                   </div>
                 </div>
-                <div class="text-right">
-                  <div class="text-2xl font-bold text-gray-900 dark:text-white"> 100.000 </div>
-                  <div class="text-sm text-red-600 dark:text-red-400 flex items-center justify-end">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    </svg>
-                  </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 mb-4">
+                  <p class="text-sm text-gray-600 dark:text-gray-300">
+                    <span class="font-medium">N° de téléphone:</span> <?= htmlspecialchars($compte->getTelephone()) ?>
+                  </p>
                 </div>
-              </div>
-              
-              <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 mb-4">
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  <span class="font-medium">N° de compte:</span> •••• •••• •••• 9156
-                </p>
-              </div>
-              
-              <div class="flex space-x-2">
-                <button class="flex-1 bg-maxitsa-orange text-white font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-200">
-                  Voir détails
-                </button>
-                <button class="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
-                  Historique
-                </button>
+                
+                <div class="flex space-x-2">
+                  <button class="flex-1 bg-maxitsa-orange text-white font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-200">
+                    Voir détails
+                  </button>
+                  <button class="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    Historique
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <!-- Compte Secondaire -->
-          <div class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center space-x-3">
-                  <div class="p-2 bg-maxitsa-orange rounded-lg">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Compte secondaire</h3>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <div class="text-2xl font-bold text-gray-900 dark:text-white"> 100.000 </div>
-                  <div class="text-sm text-red-600 dark:text-red-400 flex items-center justify-end">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 mb-4">
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  <span class="font-medium">N° de compte:</span> •••• •••• •••• 9156
-                </p>
-              </div>
-              
-              <div class="flex space-x-2">
-                <button class="flex-1 bg-maxitsa-orange text-white font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-200">
-                  Voir détails
-                </button>
-                <button class="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
-                  Historique
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
   </main>

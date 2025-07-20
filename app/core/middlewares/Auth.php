@@ -11,11 +11,9 @@ class Auth
         try {
             $session = Session::getInstance();
             $user = $session->get('user');
-            var_dump($user);
 
             if (!$user) {
                 header('Location: /');
-                echo "il ya d'utilisateur";
                 exit; 
             }
 

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Core\abstract\AbstractRepository;
+use App\Entity\CompteEntity; 
 
 class CompteRepository extends AbstractRepository{
 
@@ -17,6 +18,8 @@ class CompteRepository extends AbstractRepository{
     {
         parent::__construct();
     }
+
+
     public function getSoldeByClientId(int $clientId): ?float
     {
         $query = "SELECT solde FROM compte WHERE client_id = :clientId";
@@ -47,4 +50,26 @@ class CompteRepository extends AbstractRepository{
         
         return null;
     }
+
+     public function getAccountsByClientId(int $clientId): ?array
+    {
+        $query = "SELECT * FROM compte WHERE client_id = :clientId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':clientId', $clientId, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $accountsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($accountsData) {
+            $accounts = [];
+            foreach ($accountsData as $accountData) {
+                $accounts[] = CompteEntity::toObject($accountData);
+            }
+            return $accounts;
+        }
+        
+        return [];
+    }
+
+   
 }

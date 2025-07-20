@@ -70,13 +70,13 @@ class CompteEntity extends AbstractEntity{
     }
 
 
-    public static function toObject(array $data): CompteEntity
+    public static function toObject(array $data): static
     {
         return new static(
             $data['id'] ?? 0,
             $data['solde'] ?? 0.0,
             $data['telephone'] ?? "",
-            $data['type'] ?? ""
+            $data['type'] ?? "" 
         );
     }
 

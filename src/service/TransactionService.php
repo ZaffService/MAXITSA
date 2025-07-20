@@ -6,6 +6,7 @@ use App\Repository\TransactionRepository;
 class TransactionService
 {
     private static ?TransactionService $instance = null;
+    private TransactionRepository $transactionRepository;
 
     public static function getInstance(): TransactionService
     {

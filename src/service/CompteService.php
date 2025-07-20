@@ -28,4 +28,11 @@ class CompteService {
         return $this->compteRepository->getCompteByClientId($clientId);
     }
 
+    public function getClientAccounts(int $clientId): array
+    {
+        return $this->compteRepository->getAccountsByClientId($clientId) ?? [];
+    }
+
 }
+
+ 

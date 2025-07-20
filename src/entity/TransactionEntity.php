@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Core\Abstract\AbstractEntity;
+
 class TransactionEntity extends AbstractEntity
 {
     private int $id;
@@ -10,7 +12,7 @@ class TransactionEntity extends AbstractEntity
     private string $type; 
     private int $compteId;
 
-    public function __construct(int $id = 0, float $montant = 0.0, string $date = '', string $type = '')
+    public function __construct(int $id = 0, float $montant = 0.0, string $date = '', string $type = '', int $compteId = 0)
     {
         $this->id = $id;
         $this->montant = $montant;

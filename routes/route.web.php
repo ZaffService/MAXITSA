@@ -28,4 +28,9 @@ $routes = [
       'action' => 'addAccountForm', 
       'middlewares' => ['auth'],
   ],
+
+   '/register' => [ 
+      'controller' => UserController::class,
+      'action' => 'register',
+  ],
 ];
